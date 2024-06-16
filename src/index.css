@@ -1,6 +1,7 @@
 :root {
   --body_background: white;
   --body_color: black;
+  --button_bg_color: #45d9de;
 }
 
 [data-theme="dark"] {

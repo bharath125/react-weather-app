@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import DarkMode from "./components/dark-mode/darkMode";
+import cloud from "./cloud.svg";
 
 const api = {
   key: "10f0d0d29c43074079cd97a954ac0429",
@@ -18,7 +19,6 @@ const App = () => {
   const [weather, setWeather] = useState("");
   const [apiResponse, setApi] = useState({
     status: apiStatus.initial,
-    errorMsg: null,
   });
 
   /* 
@@ -69,20 +69,23 @@ Success View and Failure View
 */
   const renderSuccessOrFailureView = () =>
     weather.main !== undefined ? (
-      <div>
+      <div className="display-weather-data">
         {/* location */}
-        <p>{weather.name}</p>
+        <p className="location">{weather.name}</p>
 
         {/* temperature */}
-        <p>{weather.main.temp}°C</p>
+        <p>
+          <img className="cloud" src={cloud} alt="cloud" />
+          <span className="temp">{weather.main.temp}</span>°C
+        </p>
 
         {/* Date and Time */}
-        <p>{formattedDate}</p>
+        <p className="date">{formattedDate}</p>
       </div>
     ) : (
       <div>
-        <h2>City Not Found, Please Search with proper City Name</h2>
-        <button type="button" onClick={onClearSearch}>
+        <p>City Not Found, Please Search with proper City Name</p>
+        <button className="btn" type="button" onClick={onClearSearch}>
           Clear Search
         </button>
       </div>
@@ -110,12 +113,15 @@ rendering all the possible views using switch case
         {/* search box */}
         <div>
           <input
+            className="input"
             type="text"
             value={search}
             placeholder="Enter a City name..."
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button onClick={onSearch}>Search</button>
+          <button className="btn" onClick={onSearch}>
+            Search
+          </button>
         </div>
         {renderWeatherApp()}
       </header>
